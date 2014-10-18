@@ -1,4 +1,19 @@
 apache
-	 docker run -d -p 8080:80 -v "`pwd`":/var/www/html devfest/apache 
-slides
+	docker run -d -p 8080:80 -v "`pwd`":/var/www/html devfest/apache 
+
+mysql
+	https://registry.hub.docker.com/_/mysql/
+
+	docker run --name mysqlserver -e MYSQL_ROOT_PASSWORD=password -d mysql
+
+	docker run -d --link mysqlserver:db -p 8080:80 -v "`pwd`/www":/var/www/html devfest/apache 
+
+node
 	docker run -p 8080:8080 -p 35729:35729 -v "`pwd`":/slides devfest/bespoke
+
+	git clone https://github.com/markdalgleish/presentation-tabs.git .
+	npm install
+	bower install
+
+bespoke slides
+	docker run -p 8080:8080 -p 35729:35729 -v "`pwd`":/bespoke devfest/bespoke
