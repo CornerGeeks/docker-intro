@@ -16,6 +16,8 @@
 
 	docker run -d -p 8000:80 -v "`pwd`/www":/var/www/html devfest/apache 
 
+	http://localhost:8000/index.php
+
 #################################################
 # mysql
 #################################################
@@ -25,10 +27,10 @@
 	docker run --name mysqlserver -e MYSQL_ROOT_PASSWORD=password -d mysql
 
 - Start Apache container (specified above) and link to this MySQL container
-- Test with localhost:8000/mysq.php
 
 	docker run -d --link mysqlserver:db -p 8000:80 -v "`pwd`/www":/var/www/html devfest/apache 
 
+- Test with localhost:8000/mysql.php
 
 #################################################
 # bepsoke slides : self contained slide deck
@@ -43,6 +45,8 @@
 - Build image from Dockerfile
 
 	docker run -p 8080:8080 -p 35729:35729 devfest/bespoke
+
+- Test with localhost:8080
 
 #################################################
 # node : Flow for provisioning your own container
@@ -64,5 +68,9 @@
 	cd /slides
 	git clone https://github.com/markdalgleish/presentation-tabs.git .
 	npm install
-	bower install
+	bower install --allow-root
 	gulp serve
+
+- Test with localhost:8080
+
+- Test livereload by editing slides/src/index.jade
